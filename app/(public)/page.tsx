@@ -11,7 +11,7 @@ export default function Home() {
         <h1>
           P<Clock8 className="logo" strokeWidth={2.75} />cket Heist
         </h1>
-        <div>Tiny missions. Big office mischief.</div>
+        <div>Small heists. Massive fun.</div>
 
         <div className="intro-text" style={{ marginTop: '2rem', maxWidth: '600px', textAlign: 'center' }}>
           <p>

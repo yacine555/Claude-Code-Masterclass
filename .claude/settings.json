@@ -37,7 +37,8 @@
       "Write(**/*.js)",
       "Write(**/*.css)",
       "Write(**/*.json)",
-      "Write(**/*.md)"
+      "Write(**/*.md)",
+      "WebFetch"
     ],
     "ask": [
       "Bash(git push*)",
@@ -46,8 +47,7 @@
       "Bash(git reset*)",
       "Bash(npm install*)",
       "Bash(npm uninstall*)",
-      "Bash(npx*)",
-      "WebFetch"
+      "Bash(npx*)"
     ],
     "deny": [
       "Read(./.env)",
