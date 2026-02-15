@@ -11,7 +11,3 @@
 .siteNav h1 {
   @apply font-bold text-xl;
 }
-
-svg.logo {
-  display: inline-block;
-}
