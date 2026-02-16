@@ -1,0 +1,29 @@
+@reference "../../app/globals.css";
+
+.bar {
+  @apply flex items-center justify-center gap-4;
+  padding: 14px 0;
+  width: 100%;
+  margin-top: auto;
+}
+
+.scoreItem {
+  @apply flex items-center rounded-full cursor-pointer;
+  background: #d9d9d9;
+  padding: 4px 25px;
+  gap: 20px;
+  min-width: clamp(150px, 15vw, 250px);
+}
+
+.name {
+  font-size: clamp(16px, 1.6vw, 28px);
+  font-weight: 700;
+  color: #000;
+}
+
+.score {
+  font-size: clamp(16px, 1.6vw, 28px);
+  font-weight: 900;
+  color: #000;
+  margin-left: auto;
+}

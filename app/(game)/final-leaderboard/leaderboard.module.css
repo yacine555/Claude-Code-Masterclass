@@ -1,0 +1,70 @@
+@reference "../../globals.css";
+
+.container {
+  @apply flex flex-col items-center w-full h-dvh bg-white;
+  padding: clamp(16px, 3vh, 40px) clamp(40px, 6vw, 120px);
+}
+
+.header {
+  @apply flex items-baseline justify-center gap-4;
+}
+
+.headerTitle {
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 900;
+  color: #000;
+  line-height: 1;
+}
+
+.headerSub {
+  font-size: clamp(20px, 2.5vw, 40px);
+  font-weight: 700;
+  color: #000;
+}
+
+.columns {
+  @apply grid gap-x-16;
+  grid-template-columns: 1fr 1fr;
+  margin-top: clamp(32px, 5vh, 80px);
+  width: 100%;
+  max-width: 1000px;
+}
+
+.entry {
+  @apply flex items-center justify-between;
+  padding: clamp(8px, 1.5vh, 16px) 0;
+}
+
+.entryName {
+  font-size: clamp(20px, 2.5vw, 40px);
+  font-weight: 400;
+  color: #000;
+}
+
+.entryScore {
+  font-size: clamp(20px, 2.5vw, 40px);
+  font-weight: 900;
+  color: #000;
+}
+
+.footer {
+  @apply flex items-center justify-center gap-6;
+  margin-top: auto;
+  padding-bottom: clamp(16px, 2vh, 32px);
+}
+
+.footerText {
+  font-size: clamp(14px, 1.4vw, 24px);
+  font-weight: 400;
+  color: #000;
+}
+
+.qrBox {
+  @apply flex items-center justify-center;
+  border: 2px solid #000;
+  width: clamp(60px, 6vw, 100px);
+  height: clamp(60px, 6vw, 100px);
+  font-size: clamp(10px, 1vw, 14px);
+  font-weight: 400;
+  color: #000;
+}

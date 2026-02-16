@@ -1,0 +1,48 @@
+@reference "../../app/globals.css";
+
+.container {
+  @apply flex flex-col items-center text-center;
+}
+
+.title {
+  font-size: clamp(100px, 14.7vw, 235px);
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+  text-shadow: -10px 4px 14px rgba(0, 0, 0, 0.45);
+  color: var(--color-game-gold);
+}
+
+.title.large {
+  font-size: clamp(120px, 18vw, 280px);
+}
+
+.gradientText {
+  background: linear-gradient(
+    to bottom,
+    var(--color-game-gold) 24%,
+    var(--color-game-orange) 58%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradientTextAlt {
+  background: linear-gradient(
+    to bottom,
+    var(--color-game-gold) 50%,
+    var(--color-game-orange) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: clamp(20px, 2.5vw, 40px);
+  font-weight: 700;
+  color: var(--color-game-gold);
+  line-height: 1.09;
+  margin-top: 0.1em;
+}

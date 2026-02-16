@@ -1,0 +1,58 @@
+@reference "../../globals.css";
+
+.container {
+  @apply flex flex-col items-center justify-center w-full h-dvh bg-white;
+  padding: clamp(24px, 4vh, 60px) clamp(40px, 8vw, 200px);
+}
+
+.title {
+  font-size: clamp(48px, 6vw, 100px);
+  font-weight: 900;
+  color: #000;
+  line-height: 0.9;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: clamp(20px, 2.5vw, 40px);
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin-top: 0.2em;
+}
+
+.description {
+  font-size: clamp(16px, 1.5vw, 24px);
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+  margin-top: clamp(16px, 2vh, 32px);
+}
+
+.rules {
+  @apply text-left;
+  list-style: disc;
+  margin-top: clamp(16px, 3vh, 40px);
+  padding-left: 1.5em;
+  max-width: 800px;
+}
+
+.rules li {
+  font-size: clamp(18px, 2vw, 32px);
+  font-weight: 700;
+  color: #000;
+  line-height: 1.4;
+  margin-bottom: clamp(8px, 1.5vh, 20px);
+}
+
+.tagline {
+  font-size: clamp(24px, 3vw, 48px);
+  font-weight: 900;
+  color: #000;
+  text-align: center;
+  margin-top: clamp(24px, 4vh, 60px);
+}
+
+.taglineBold {
+  font-style: italic;
+}

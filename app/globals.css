@@ -12,6 +12,11 @@
   --color-error: #FF6467;
   --color-heading: white;
   --color-body: #99A1AF;
+  --color-game-green: #1C4C36;
+  --color-game-gold: #F3CD24;
+  --color-game-orange: #FF5100;
+  --color-game-isi-bg: #F4F4F4;
+  --color-game-scrollbar: #909092;
   --font-sans: 'Inter', sans-serif;
 }
 

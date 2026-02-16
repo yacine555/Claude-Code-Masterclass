@@ -1,0 +1,59 @@
+@reference "../../app/globals.css";
+
+.container {
+  @apply flex flex-col items-center gap-[30px] h-full bg-game-isi-bg overflow-hidden pb-3;
+}
+
+.logo {
+  @apply flex flex-col items-center justify-center bg-white rounded-b-[15px] shadow-md shrink-0 px-4 py-3;
+  width: 66%;
+}
+
+.brand {
+  @apply font-black text-game-green tracking-wide;
+  font-size: clamp(16px, 1.4vw, 22px);
+}
+
+.brandSub {
+  @apply text-game-orange italic;
+  font-size: clamp(10px, 0.8vw, 13px);
+}
+
+.content {
+  @apply flex flex-col gap-4 px-4 overflow-y-auto flex-1 w-full;
+  font-size: clamp(13px, 1.2vw, 19px);
+  line-height: 1.2;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-game-scrollbar) transparent;
+}
+
+.section {
+  @apply flex flex-col gap-1;
+}
+
+.sectionHeading {
+  @apply font-bold uppercase;
+  color: var(--color-game-green);
+  font-size: clamp(13px, 1.2vw, 19px);
+}
+
+.sectionHeadingAlt {
+  @apply font-bold uppercase;
+  font-size: clamp(13px, 1.2vw, 19px);
+}
+
+.blackBox {
+  @apply border-2 border-black px-3 py-2;
+}
+
+.blackBoxTitle {
+  @apply font-medium mb-1;
+}
+
+.blackBox ul {
+  @apply list-disc pl-7;
+}
+
+.blackBox li {
+  @apply mb-1;
+}

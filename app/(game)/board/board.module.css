@@ -1,0 +1,140 @@
+@reference "../../globals.css";
+
+.container {
+  @apply flex flex-col w-full h-dvh bg-white;
+}
+
+.grid {
+  @apply flex-1 grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto repeat(4, 1fr);
+  gap: 2px;
+  padding: 4px;
+}
+
+.categoryHeader {
+  @apply flex items-center justify-center;
+  background: #f0f0f0;
+  padding: clamp(8px, 1.5vh, 20px) 8px;
+  font-size: clamp(10px, 1.1vw, 18px);
+  font-weight: 900;
+  color: #000;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.card {
+  @apply flex items-center justify-center cursor-pointer;
+  border: 1px solid #e0e0e0;
+  font-size: clamp(32px, 4.5vw, 72px);
+  font-weight: 900;
+  color: #000;
+  transition: background 0.15s ease;
+}
+
+.card:hover {
+  background: #f5f5f5;
+}
+
+.cardAnswered {
+  @apply cursor-default;
+  background: white;
+}
+
+.cardAnswered:hover {
+  background: white;
+}
+
+/* Keep Playing Popup Overlay */
+.overlay {
+  @apply fixed inset-0 flex items-center justify-center;
+  background: rgba(255, 255, 255, 0.95);
+  z-index: 50;
+}
+
+.popup {
+  @apply flex flex-col items-center;
+  padding: clamp(24px, 4vh, 60px);
+}
+
+.popupScores {
+  @apply flex items-center justify-center gap-4 w-full;
+  margin-bottom: clamp(8px, 1vh, 16px);
+}
+
+.popupScoreItem {
+  @apply flex items-center rounded-full;
+  background: #d9d9d9;
+  padding: 4px 25px;
+  gap: 20px;
+  min-width: clamp(150px, 15vw, 250px);
+  font-size: clamp(16px, 1.6vw, 28px);
+  font-weight: 700;
+  color: #000;
+}
+
+.popupScoreValue {
+  font-weight: 900;
+  margin-left: auto;
+}
+
+.popupDivider {
+  @apply flex items-center gap-4 w-full;
+  max-width: 800px;
+  margin-bottom: clamp(24px, 4vh, 60px);
+}
+
+.popupDivider::before,
+.popupDivider::after {
+  content: "";
+  @apply flex-1;
+  height: 1px;
+  background: #999;
+}
+
+.popupDividerText {
+  font-size: clamp(12px, 1.2vw, 22px);
+  font-weight: 700;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.popupQuestion {
+  font-size: clamp(28px, 3.5vw, 56px);
+  font-weight: 900;
+  color: #000;
+  text-align: center;
+  margin-bottom: clamp(24px, 4vh, 48px);
+}
+
+.popupButtons {
+  @apply flex gap-8;
+}
+
+.popupButton {
+  @apply flex flex-col items-center justify-center cursor-pointer;
+  border: 2px solid #000;
+  padding: clamp(12px, 2vh, 24px) clamp(24px, 4vw, 60px);
+  min-width: clamp(150px, 15vw, 245px);
+  transition: background 0.15s ease;
+}
+
+.popupButton:hover {
+  background: #f0f0f0;
+}
+
+.popupButtonTitle {
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 900;
+  color: #000;
+}
+
+.popupButtonSub {
+  font-size: clamp(12px, 1vw, 17px);
+  font-weight: 400;
+  color: #000;
+  margin-top: 4px;
+}

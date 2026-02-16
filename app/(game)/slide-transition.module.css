@@ -1,0 +1,60 @@
+@reference "../../app/globals.css";
+
+/* Shared slide transition animations for all game screens */
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.slideIn {
+  animation: slideInFromRight 0.5s ease-out;
+}
+
+.slideOut {
+  animation: slideOutToLeft 0.5s ease-in forwards;
+  pointer-events: none;
+}
+
+/* Navigation tap zones (invisible left/right areas) */
+.navZones {
+  @apply absolute inset-0 flex pointer-events-none;
+  z-index: 10;
+}
+
+.navPrev,
+.navNext {
+  @apply pointer-events-auto cursor-pointer;
+  width: 17.5%;
+  height: 100%;
+}
+
+.navPrev {
+  @apply absolute left-0 top-0;
+}
+
+.navNext {
+  @apply absolute right-0 top-0;
+}
+
+.navSpacer {
+  @apply flex-1;
+  pointer-events: none;
+}

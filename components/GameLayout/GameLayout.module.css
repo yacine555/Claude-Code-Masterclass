@@ -1,0 +1,14 @@
+@reference "../../app/globals.css";
+
+.container {
+  @apply flex w-full h-dvh overflow-hidden;
+}
+
+.main {
+  @apply flex-1 relative overflow-hidden;
+}
+
+.sidebar {
+  width: 32.2%;
+  @apply shrink-0;
+}

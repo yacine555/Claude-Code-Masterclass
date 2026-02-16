@@ -1,0 +1,24 @@
+@reference "../../globals.css";
+
+.background {
+  @apply w-full h-full;
+  background:
+    linear-gradient(to bottom, rgba(28, 76, 54, 0.4), rgba(28, 76, 54, 0.6)),
+    url("/images/game/screensaver-bg.jpg") center / cover no-repeat;
+  background-blend-mode: hard-light, normal;
+}
+
+.content {
+  @apply flex flex-col items-center justify-center h-full px-8;
+  gap: clamp(16px, 2vw, 32px);
+  padding-top: clamp(40px, 5vh, 82px);
+  padding-bottom: clamp(16px, 2vh, 24px);
+}
+
+.prompt {
+  @apply text-white text-right self-end;
+  font-size: clamp(14px, 1.25vw, 20px);
+  font-weight: 500;
+  line-height: 1.09;
+  margin-top: auto;
+}

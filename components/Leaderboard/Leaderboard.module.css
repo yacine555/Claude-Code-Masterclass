@@ -1,0 +1,39 @@
+@reference "../../app/globals.css";
+
+.board {
+  @apply grid grid-cols-2 rounded-[30px] text-white;
+  gap: clamp(40px, 7.5vw, 120px);
+  background-color: var(--color-game-green);
+  mix-blend-mode: hard-light;
+  padding: clamp(20px, 2.2vw, 35px) clamp(20px, 2.5vw, 40px);
+  font-size: clamp(18px, 1.9vw, 30px);
+  line-height: 1.09;
+}
+
+.column {
+  @apply flex flex-col;
+  gap: clamp(16px, 1.9vw, 30px);
+}
+
+.slot {
+  @apply flex items-center;
+  gap: clamp(12px, 1.6vw, 25px);
+}
+
+.gold {
+  color: var(--color-game-gold);
+}
+
+.rank {
+  @apply font-black text-center shrink-0;
+  width: 1.2em;
+}
+
+.name {
+  @apply font-bold uppercase whitespace-nowrap flex-1;
+}
+
+.score {
+  @apply font-black text-center shrink-0;
+  min-width: 4em;
+}
