@@ -3,6 +3,30 @@ import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import AuthForm from "@/components/AuthForm";
 
+// ─── Mocks ───────────────────────────────────────────────────────────────────
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ replace: vi.fn() }),
+}));
+
+vi.mock("firebase/auth", () => ({
+  createUserWithEmailAndPassword: vi.fn().mockResolvedValue({ user: { uid: "uid123" } }),
+  updateProfile: vi.fn().mockResolvedValue(undefined),
+}));
+
+vi.mock("firebase/firestore", () => ({
+  setDoc: vi.fn().mockResolvedValue(undefined),
+  doc: vi.fn().mockReturnValue("users/uid123"),
+}));
+
+vi.mock("@/lib/firebase", () => ({ auth: {}, db: {} }));
+
+vi.mock("@/lib/codename", () => ({
+  generateCodename: vi.fn(() => "SilentCrimsonFox"),
+}));
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 describe("AuthForm", () => {
   describe("Rendering", () => {
     it("renders all required fields for login mode", () => {
@@ -278,7 +302,7 @@ describe("AuthForm", () => {
       consoleSpy.mockRestore();
     });
 
-    it("logs correct mode for signup", async () => {
+    it("does not log to console for signup (uses Firebase instead)", async () => {
       const user = userEvent.setup();
       const consoleSpy = vi.spyOn(console, "log");
       render(<AuthForm mode="signup" />);
@@ -291,11 +315,7 @@ describe("AuthForm", () => {
       await user.type(passwordInput, "password123");
       await user.click(submitButton);
 
-      expect(consoleSpy).toHaveBeenCalledWith({
-        email: "test@example.com",
-        password: "password123",
-        mode: "signup",
-      });
+      expect(consoleSpy).not.toHaveBeenCalled();
 
       consoleSpy.mockRestore();
     });

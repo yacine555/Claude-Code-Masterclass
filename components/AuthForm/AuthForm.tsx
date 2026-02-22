@@ -4,17 +4,25 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import styles from "./AuthForm.module.css";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { setDoc, doc } from "firebase/firestore";
+import { auth, db } from "@/lib/firebase";
+import { generateCodename } from "@/lib/codename";
+import { useRouter } from "next/navigation";
 
 type AuthFormProps = {
   mode: "login" | "signup";
 };
 
 export default function AuthForm({ mode }: AuthFormProps) {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [formError, setFormError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateEmail = (value: string): boolean => {
     if (!value) {
@@ -51,7 +59,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
     validatePassword(password);
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     // Validate both fields
@@ -63,12 +71,41 @@ export default function AuthForm({ mode }: AuthFormProps) {
       return;
     }
 
-    // Log to console
-    console.log({
-      email,
-      password,
-      mode,
-    });
+    if (mode === "signup") {
+      setIsLoading(true);
+      setFormError("");
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const codename = generateCodename();
+
+        try {
+          await updateProfile(userCredential.user, { displayName: codename });
+        } catch {
+          // silently ignore
+        }
+
+        try {
+          await setDoc(doc(db, "users", userCredential.user.uid), {
+            id: userCredential.user.uid,
+            codename,
+          });
+        } catch {
+          // silently ignore
+        }
+
+        router.replace(`/welcome?codename=${codename}`);
+      } catch (err: unknown) {
+        const code = (err as { code?: string }).code;
+        if (code === "auth/email-already-in-use") {
+          setFormError("This email is already registered.");
+        } else {
+          setFormError("Something went wrong. Please try again.");
+        }
+        setIsLoading(false);
+      }
+    } else {
+      console.log({ email, password, mode });
+    }
   };
 
   return (
@@ -119,7 +156,11 @@ export default function AuthForm({ mode }: AuthFormProps) {
         )}
       </div>
 
-      <button type="submit" className={styles.submitButton}>
+      {formError && (
+        <span role="alert">{formError}</span>
+      )}
+
+      <button type="submit" className={styles.submitButton} disabled={isLoading}>
         {mode === "login" ? "Log In" : "Sign Up"}
       </button>
 
