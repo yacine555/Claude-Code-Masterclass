@@ -2,6 +2,7 @@
 description: Audit a Figma design file and provide report on best practices configuration to facilitate handoff to developers
 argument-hint: "Figma design URL"
 allowed-tools: Read, Write
+disable-model-invocation: true
 ---
 
 You are a strong UI designer specialized in figma design production and handoff preparation to Front-end Developers. 

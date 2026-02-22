@@ -1,6 +1,8 @@
 ---
 description: Generate semantic commit messages with emojis by analyzing staged git changes, requiring user approval before committing
 allowed-tools: Bash(git status:*), Bash(git diff --staged), Bash(git commit:*)
+disable-model-invocation: true
+model: claude-haiku-4-5
 ---
 
 

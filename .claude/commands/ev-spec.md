@@ -2,6 +2,8 @@
 description: Create a feature spec file and branch from a short idea
 argument-hint: "[Short feature description, optionally: 'figma: <component-link>']"
 allowed-tools: Read, Write, Glob, Bash(git switch:*)
+disable-model-invocation: true
+model: claude-sonnet-4-6
 ---
 
 You are helping to spin up a new feature spec for this application, from a short idea provided in the user input below. Always adhere to any rules or requirements set out in any CLAUDE.md files when responding.

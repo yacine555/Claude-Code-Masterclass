@@ -2,35 +2,23 @@
 // when logged in --> to /heists
 // when not logged in --> to /login
 
-import { Clock8 } from "lucide-react";
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useUser } from "@/contexts/AuthContext";
 
 export default function Home() {
-  return (
-    <div className="center-content">
-      <div className="page-content">
-        <h1>
-          P<Clock8 className="logo" strokeWidth={2.75} />
-          cket Heist
-        </h1>
-        <div>Small crimes. Big smiles.</div>
+  const { user, loading } = useUser();
+  const router = useRouter();
 
-        <div
-          className="intro-text"
-          style={{ marginTop: "2rem", maxWidth: "600px", textAlign: "center" }}
-        >
-          <p>
-            Welcome to Pocket Heist, where the mundane meets the mischievous.
-            Transform your ordinary workday into an adventure with bite-sized
-            challenges that bring excitement to the everyday.
-          </p>
-          <p>
-            Plan your next office caper, track your progress, and compete with
-            colleagues in a game of harmless pranks and clever tasks. From the
-            coffee machine to the conference room, no corner is safe from your
-            playful schemes.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    if (loading) return;
+    if (user) {
+      router.replace("/heists");
+    } else {
+      router.replace("/login");
+    }
+  }, [user, loading, router]);
+
+  return null;
 }
