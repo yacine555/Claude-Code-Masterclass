@@ -79,11 +79,11 @@ Before making any content, switch to a new Git branch using the `branch_name` de
 
 ## Step 4. Draft the spec content
 
-Create a markdown spec document that Plan mode can use directly and save it in the _specs folder using the `feature_slug`. Use the exact structure as defined in the spec template file here: @_specs/template.md. Do not add technical implementation details such as code examples.
+Create a markdown spec document that Plan mode can use directly and save it and write it in the _specs folder using the `feature_slug`. Use the exact structure as defined in the spec template file here: @_specs/template.md. Do not add technical implementation details such as code examples.
 
 ## Step 5. Final output to the user
 
-After the file is saved, respond to the user with a short summary in this exact format:
+After the file is wrote in the  _plans folder, respond to the user with a short summary in this exact format:
 
 Branch: <branch_name>
 Spec file: specs/<feature_slug>.md
