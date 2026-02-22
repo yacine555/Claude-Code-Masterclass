@@ -11,6 +11,7 @@ vi.mock("next/navigation", () => ({
 
 vi.mock("firebase/auth", () => ({
   createUserWithEmailAndPassword: vi.fn().mockResolvedValue({ user: { uid: "uid123" } }),
+  signInWithEmailAndPassword: vi.fn().mockResolvedValue({ user: { uid: "uid123" } }),
   updateProfile: vi.fn().mockResolvedValue(undefined),
 }));
 
@@ -26,6 +27,10 @@ vi.mock("@/lib/codename", () => ({
 }));
 
 // ─────────────────────────────────────────────────────────────────────────────
+
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
 describe("AuthForm", () => {
   describe("Rendering", () => {
@@ -200,45 +205,33 @@ describe("AuthForm", () => {
     });
 
     it("prevents submission when email is invalid", async () => {
+      const { signInWithEmailAndPassword } = await import("firebase/auth");
       const user = userEvent.setup();
-      const consoleSpy = vi.spyOn(console, "log");
       render(<AuthForm mode="login" />);
 
-      const emailInput = screen.getByLabelText("Email");
-      const passwordInput = screen.getByLabelText("Password");
-      const submitButton = screen.getByRole("button", { name: /log in/i });
+      await user.type(screen.getByLabelText("Email"), "invalidemail");
+      await user.type(screen.getByLabelText("Password"), "password123");
+      await user.click(screen.getByRole("button", { name: /log in/i }));
 
-      await user.type(emailInput, "invalidemail");
-      await user.type(passwordInput, "password123");
-      await user.click(submitButton);
-
-      expect(consoleSpy).not.toHaveBeenCalled();
+      expect(signInWithEmailAndPassword).not.toHaveBeenCalled();
       expect(
         screen.getByText(/please enter a valid email address/i),
       ).toBeInTheDocument();
-
-      consoleSpy.mockRestore();
     });
 
     it("prevents submission when password is too short", async () => {
+      const { signInWithEmailAndPassword } = await import("firebase/auth");
       const user = userEvent.setup();
-      const consoleSpy = vi.spyOn(console, "log");
       render(<AuthForm mode="login" />);
 
-      const emailInput = screen.getByLabelText("Email");
-      const passwordInput = screen.getByLabelText("Password");
-      const submitButton = screen.getByRole("button", { name: /log in/i });
+      await user.type(screen.getByLabelText("Email"), "test@example.com");
+      await user.type(screen.getByLabelText("Password"), "short");
+      await user.click(screen.getByRole("button", { name: /log in/i }));
 
-      await user.type(emailInput, "test@example.com");
-      await user.type(passwordInput, "short");
-      await user.click(submitButton);
-
-      expect(consoleSpy).not.toHaveBeenCalled();
+      expect(signInWithEmailAndPassword).not.toHaveBeenCalled();
       expect(
         screen.getByText(/password must be at least 8 characters/i),
       ).toBeInTheDocument();
-
-      consoleSpy.mockRestore();
     });
 
     it("clears errors when valid input is provided", async () => {
@@ -280,57 +273,25 @@ describe("AuthForm", () => {
   });
 
   describe("Submission", () => {
-    it("logs email and password to console on valid submission", async () => {
+    it("shows a success message on valid login submission", async () => {
       const user = userEvent.setup();
-      const consoleSpy = vi.spyOn(console, "log");
       render(<AuthForm mode="login" />);
 
-      const emailInput = screen.getByLabelText("Email");
-      const passwordInput = screen.getByLabelText("Password");
-      const submitButton = screen.getByRole("button", { name: /log in/i });
+      await user.type(screen.getByLabelText("Email"), "test@example.com");
+      await user.type(screen.getByLabelText("Password"), "password123");
+      await user.click(screen.getByRole("button", { name: /log in/i }));
 
-      await user.type(emailInput, "test@example.com");
-      await user.type(passwordInput, "password123");
-      await user.click(submitButton);
-
-      expect(consoleSpy).toHaveBeenCalledWith({
-        email: "test@example.com",
-        password: "password123",
-        mode: "login",
-      });
-
-      consoleSpy.mockRestore();
+      expect(await screen.findByRole("status")).toBeInTheDocument();
     });
 
-    it("does not log to console for signup (uses Firebase instead)", async () => {
+    it("does not call signIn when validation fails", async () => {
+      const { signInWithEmailAndPassword } = await import("firebase/auth");
       const user = userEvent.setup();
-      const consoleSpy = vi.spyOn(console, "log");
-      render(<AuthForm mode="signup" />);
-
-      const emailInput = screen.getByLabelText("Email");
-      const passwordInput = screen.getByLabelText("Password");
-      const submitButton = screen.getByRole("button", { name: /sign up/i });
-
-      await user.type(emailInput, "test@example.com");
-      await user.type(passwordInput, "password123");
-      await user.click(submitButton);
-
-      expect(consoleSpy).not.toHaveBeenCalled();
-
-      consoleSpy.mockRestore();
-    });
-
-    it("does not log when validation fails", async () => {
-      const user = userEvent.setup();
-      const consoleSpy = vi.spyOn(console, "log");
       render(<AuthForm mode="login" />);
 
-      const submitButton = screen.getByRole("button", { name: /log in/i });
-      await user.click(submitButton);
+      await user.click(screen.getByRole("button", { name: /log in/i }));
 
-      expect(consoleSpy).not.toHaveBeenCalled();
-
-      consoleSpy.mockRestore();
+      expect(signInWithEmailAndPassword).not.toHaveBeenCalled();
     });
   });
 

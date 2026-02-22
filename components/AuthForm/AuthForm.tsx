@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import styles from "./AuthForm.module.css";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
 import { generateCodename } from "@/lib/codename";
@@ -23,6 +23,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
   const [passwordError, setPasswordError] = useState("");
   const [formError, setFormError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const validateEmail = (value: string): boolean => {
     if (!value) {
@@ -104,9 +105,32 @@ export default function AuthForm({ mode }: AuthFormProps) {
         setIsLoading(false);
       }
     } else {
-      console.log({ email, password, mode });
+      setIsLoading(true);
+      setFormError("");
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        setSuccess(true);
+      } catch (err: unknown) {
+        const code = (err as { code?: string }).code;
+        if (
+          code === "auth/invalid-credential" ||
+          code === "auth/wrong-password" ||
+          code === "auth/user-not-found"
+        ) {
+          setFormError("Invalid email or password.");
+        } else if (code === "auth/too-many-requests") {
+          setFormError("Too many failed attempts. Please try again later.");
+        } else {
+          setFormError("Something went wrong. Please try again.");
+        }
+        setIsLoading(false);
+      }
     }
   };
+
+  if (success) {
+    return <p role="status">You&apos;re logged in!</p>;
+  }
 
   return (
     <form onSubmit={handleSubmit}>
