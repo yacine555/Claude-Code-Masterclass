@@ -19,7 +19,8 @@ export default function HeistsLayout({
     }
   }, [user, loading, router]);
 
-  if (loading || !user) return null;
+  if (loading) return <p role="status" aria-live="polite">Loading…</p>;
+  if (!user) return null;
 
   return (
     <>
