@@ -1,0 +1,139 @@
+@reference "../../app/globals.css";
+
+.splash {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #030712;
+}
+
+/* Perspective grid lines */
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(194, 122, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(194, 122, 255, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
+}
+
+/* Atmospheric glow */
+.glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 50% at 50% 55%, rgba(152, 16, 250, 0.13) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 35% at 65% 35%, rgba(230, 0, 118, 0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Content block */
+.content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 2rem;
+  max-width: 960px;
+  width: 100%;
+}
+
+/* Classified badge */
+.badge {
+  display: inline-block;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  border: 1px dashed rgba(194, 122, 255, 0.35);
+  padding: 0.35rem 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.1s forwards;
+}
+
+/* Hero title */
+.title {
+  font-size: clamp(5.5rem, 20vw, 15rem);
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #C27AFF 45%, #FB64B6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.2s forwards;
+}
+
+/* Tagline */
+.tagline {
+  font-size: 1rem;
+  color: var(--color-body);
+  line-height: 1.85;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.35s forwards;
+}
+
+/* CTA area */
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.5s forwards;
+}
+
+.loginLink {
+  font-size: 0.875rem;
+  color: var(--color-body);
+}
+
+.loginLink a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.loginLink a:hover {
+  color: var(--color-secondary);
+}
+
+/* Corner bracket decorations */
+.cornerTL,
+.cornerBR {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease 0.65s forwards;
+}
+
+.cornerTL {
+  top: 2rem;
+  left: 2rem;
+  border-top: 1px solid rgba(194, 122, 255, 0.28);
+  border-left: 1px solid rgba(194, 122, 255, 0.28);
+}
+
+.cornerBR {
+  bottom: 2rem;
+  right: 2rem;
+  border-bottom: 1px solid rgba(194, 122, 255, 0.28);
+  border-right: 1px solid rgba(194, 122, 255, 0.28);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
