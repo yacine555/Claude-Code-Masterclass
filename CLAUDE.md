@@ -6,6 +6,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Pocket Heist is a Next.js 16 application demonstrating modern React patterns with TypeScript. It's a learning project built with the App Router, featuring authentication flows and a dashboard interface for managing "heists."
 
+## Plans
+
+Make the plan extremely concise. Sacrifice grammar for the sake of concision.
+At the end of each plan, give me a list of unresolved questions to answer, if any.
+
 ## Development Commands
 
 ```bash
