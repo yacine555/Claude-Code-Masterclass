@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import { serverTimestamp } from "firebase/firestore";
+import { Timestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useUser } from "@/contexts/AuthContext";
 import { COLLECTIONS, UserDoc, userConverter } from "@/types/firestore";
@@ -84,7 +84,7 @@ export default function CreateHeistForm() {
         createdByCodename: user!.displayName ?? "Unknown",
         assignedTo,
         assignedToCodename,
-        deadline: serverTimestamp(),
+        deadline: Timestamp.fromDate(new Date("2030-12-31")),
         finalStatus: null,
       };
 

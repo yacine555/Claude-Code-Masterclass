@@ -11,3 +11,7 @@
 .siteNav h1 {
   @apply font-bold text-xl;
 }
+
+.siteNav h1 a {
+  @apply inline-flex items-center gap-0 text-[var(--color-primary)] no-underline whitespace-nowrap;
+}
