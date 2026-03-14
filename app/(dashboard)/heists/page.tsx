@@ -1,20 +1,31 @@
 "use client";
 import { useUser } from "@/contexts/AuthContext";
 import { useHeists } from "@/hooks";
+import HeistCard from "@/components/HeistCard";
+import HeistCardSkeleton from "@/components/HeistCardSkeleton";
+import styles from "./heists.module.css";
 
-function HeistList({ mode }: { mode: "active" | "assigned" | "expired" }) {
+function HeistList({ mode }: { mode: "active" | "assigned" }) {
   const { heists, loading, error } = useHeists(mode);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className={styles.grid}>
+        <HeistCardSkeleton />
+        <HeistCardSkeleton />
+        <HeistCardSkeleton />
+      </div>
+    );
+
   if (error) return <p role="alert">Error: {error.message}</p>;
-  if (heists.length === 0) return <p>No heists found.</p>;
+  if (heists.length === 0) return null;
 
   return (
-    <ul>
+    <div className={styles.grid}>
       {heists.map((heist) => (
-        <li key={heist.id}>{heist.title}</li>
+        <HeistCard key={heist.id} heist={heist} />
       ))}
-    </ul>
+    </div>
   );
 }
 
@@ -23,17 +34,13 @@ export default function HeistsPage() {
 
   return (
     <div className="page-content">
-      <div className="active-heists">
+      <div>
         <h2>{user?.displayName ? `${user.displayName}'s Active Heists` : "Your Active Heists"}</h2>
         <HeistList mode="active" />
       </div>
-      <div className="assigned-heists">
+      <div>
         <h2>Heists You&apos;ve Assigned</h2>
         <HeistList mode="assigned" />
-      </div>
-      <div className="expired-heists">
-        <h2>All Expired Heists</h2>
-        <HeistList mode="expired" />
       </div>
     </div>
   );

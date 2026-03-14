@@ -1,0 +1,43 @@
+.card {
+  background-color: var(--color-light);
+  border: 1px solid #1E2939;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background-color 0.15s ease;
+}
+
+.card:hover {
+  background-color: var(--color-lighter);
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-heading);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.title:hover {
+  text-decoration: underline;
+}
+
+.detail {
+  font-size: 0.875rem;
+  color: var(--color-body);
+  margin: 0;
+}
+
+.label {
+  color: var(--color-body);
+  opacity: 0.6;
+}
+
+.codename {
+  color: var(--color-primary);
+}
